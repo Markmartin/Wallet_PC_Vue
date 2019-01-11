@@ -1,0 +1,107 @@
+@import "../less/color.less";
+
+.Guide {
+    position: relative;
+    top: 180px;
+    width: 100vw;
+    //   background-color: @FeatureBackColor;
+    .GuideFeatureContainer {
+      background-color: @FeatureBackColor;
+      .GuideFeature {
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        .FeatureCell {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: center;
+          width: 100%;
+          height: 130px;
+          .FeatureCellIcon {
+            flex-shrink: 0;
+            width: 14.25vw;
+            height: 9.8vw;
+            min-width: 64px;
+            min-height: 43px;
+          }
+          .FeatureDes {
+            width: 75vw;
+            height: 100%;
+              //   background-color: cadetblue;
+              .FeatureTitle {
+                display: block;
+                position: relative;
+                top: 30px;
+                width: 90%;
+                margin: 0 auto;
+                line-height: 1rem;
+                text-align: left;
+                color: @FeatureTitleColor;
+                font-weight: 500;
+              }
+              .FeatureValue {
+                display: block;
+                position: relative;
+                top: 40px;
+                width: 90%;
+                height: 3.2rem;
+                margin: 0 auto;
+                line-height: 1.15rem;
+                text-align: left;
+                color: @FeatureTextColor;
+                font-size: 0.875rem;
+                font-weight: 500;
+                white-space: pre-line;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+            }
+        }
+      }
+    }
+  
+    .GuideInstallation {
+      position: relative;
+      top: 10px;
+      width: 100%;
+      // height: 500px;
+      justify-content: space-around;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-content: flex-start;
+        .InstallationCell {
+          background-color: @FeatureBackColor;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          align-content: center;
+          align-items: center;
+          text-align: left;
+          margin-top: 20px;
+          .InstallTitle {
+            width: 95%;
+            font-weight: 500;
+            color: @ThemeColor;
+            text-indent: 20px;
+            font-size: 1.1rem;
+            line-height: 2.5rem;
+            // padding-bottom: 10px;
+          }
+          .InstallText {
+            width: 95%;
+            font-weight: 500;
+            color: @FeatureTextColor;
+            text-indent: 20px;
+            font-size: 0.9rem;
+            height: 2rem;
+            line-height: 1.5rem;
+          }
+        }
+    }
+}
