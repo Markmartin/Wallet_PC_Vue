@@ -1,7 +1,12 @@
 <template>
   <div class="WalletApply">
     <div class="left">
-      <label class="WalletTitle">Fill in your wallet information and click "Request"</label>
+      <div class="WalletDes">
+        <label class="WalletTitle">{{$t("WalletApply.title")}}</label>
+        <label class="WalletTip">{{$t("WalletApply.desone")}}</label>
+        <label class="WalletTip">{{$t("WalletApply.destwo")}}</label>
+      </div>
+
       <div class="WalletShowLogo">
         <img class="logo" src="../assets/step_two.png">
       </div>
@@ -9,13 +14,21 @@
     <div class="right">
       <div class="ApplyForm">
         <img src="../assets/sicob.png" class="FormLogo">
-        <label class="inputTitle">Name</label>
+        <label class="inputTitle">{{$t("WalletApply.name")}}</label>
         <input class="inputClass" v-model="name">
-        <label class="inputTitle">Mail</label>
+        <label class="inputTitle">{{$t("WalletApply.mail")}}</label>
         <input class="inputClass" v-model="mail">
-        <label class="inputTitle">ITC Address</label>
+        <label class="inputTitle">{{$t("WalletApply.itcaddress")}}</label>
         <input class="inputClass" v-model="address">
-        <label class="applyBtn" @click="applyITC"></label>
+        <!-- <label
+          class="applyBtn"
+          @click="applyITC"
+          :style="{backgroundImage:'url(' + getRequestImg + ')', backgroundRepeat:'no-repeat', backgroundPosition:'center center', backgroundSize: 'contain'}"
+        ></label>-->
+        <button
+          class="applyBtn backgroundBlueGradient backgroundAnimation"
+          @click="applyITC"
+        >{{$t('Common.RequestOne')}}</button>
       </div>
     </div>
   </div>
@@ -24,6 +37,8 @@
 <script>
 import httpManager from "../httpManager/httpManager.js";
 import tool from "../utils/tool.js";
+import "../less/gradient.less";
+
 export default {
   name: "WalletApply",
   data: function() {
@@ -84,7 +99,8 @@ export default {
 //pc
 @media screen and (min-width: 768px) {
   .WalletApply {
-    margin-top: 89px;
+    top: 150px;
+    margin-bottom: 70px;
     flex-direction: row;
     justify-content: center;
     .left {
@@ -94,48 +110,64 @@ export default {
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
-      .WalletTitle {
-        display: block;
-        position: relative;
-        top: 50px;
-        width: 100%;
-        height: 4.5rem;
-        line-height: 2.5rem;
-        text-align: left;
-        font-size: 1.8rem;
-        // letter-spacing: px;
-        font-weight: 800;
-        color: transparent;
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
-        background-image: repeating-linear-gradient(
-          135deg,
-          #015ba0,
-          #005ca1,
-          #005384,
-          #004769,
-          #004560,
-          #005a79,
-          #00789f,
-          #007397,
-          #006391,
-          #01598b,
-          #015c98
-        );
-        background-size: 300% 300%;
-        animation: walletslide 3s infinite linear both;
-        -moz-animation: walletslide 3s infinite linear both;
-        -webkit-animation: walletslide 3s infinite linear both;
-        -o-animation: walletslide 3s infinite linear both;
-      }
-      @keyframes walletslide {
-        0% {
-          background-position: 0% 0%;
+      .WalletDes {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 20px;
+        .WalletTip {
+          margin-top: 8px;
+          position: relative;
+          width: 100%;
+          color: @WalletTextColor;
+          height: 1.2rem;
+          line-height: 1.2rem;
+          text-align: left;
+          font-size: 0.9rem;
         }
-        100% {
-          background-position: 100% 100%;
+        .WalletTitle {
+          display: block;
+          position: relative;
+          width: 100%;
+          height: 4.5rem;
+          line-height: 2rem;
+          text-align: left;
+          font-size: 1.8rem;
+          // letter-spacing: px;
+          font-weight: 800;
+          color: transparent;
+          -webkit-text-fill-color: transparent;
+          -webkit-background-clip: text;
+          background-image: repeating-linear-gradient(
+            135deg,
+            #015ba0,
+            #005ca1,
+            #005384,
+            #004769,
+            #004560,
+            #005a79,
+            #00789f,
+            #007397,
+            #006391,
+            #01598b,
+            #015c98
+          );
+          background-size: 300% 300%;
+          animation: walletslide 3s infinite linear both;
+          -moz-animation: walletslide 3s infinite linear both;
+          -webkit-animation: walletslide 3s infinite linear both;
+          -o-animation: walletslide 3s infinite linear both;
+        }
+        @keyframes walletslide {
+          0% {
+            background-position: 0% 0%;
+          }
+          100% {
+            background-position: 100% 100%;
+          }
         }
       }
+
       .WalletShowLogo {
         width: 100%;
         .logo {
@@ -196,14 +228,15 @@ export default {
         }
         .applyBtn {
           display: block;
-          margin-top: 20px;
-          width: 90%;
-          height: 62px;
+          margin-top: 30px;
+          width: 80%;
+          height: 45px;
           outline: none;
           cursor: pointer;
           font-size: 1rem;
-          background: url("../assets/request_two.png") no-repeat center;
-          background-size: cover;
+          color: white;
+          border: 1px solid transparent;
+          border-radius: 6px;
         }
       }
     }
@@ -213,60 +246,80 @@ export default {
 //mobile
 @media screen and (max-width: 768px) {
   .WalletApply {
-    margin-top: 159px;
+    padding-top: 100px;
+    height: 600px;
+    // margin-bottom: 50px;
     flex-direction: column;
-    // align-items: center;
-    justify-content: center;
-    // align-content: center;
+    justify-content: flex-start;
     .left {
+      position: relative;
       width: 100%;
+      height: 380px;
       display: flex;
       flex-direction: column;
-      // align-items: center;
-      justify-content: space-around;
-      .WalletTitle {
-        display: block;
-        position: relative;
-        margin-top: 20px;
-        width: 100%;
-        height: 3rem;
-        line-height: 1.5rem;
-        text-align: center;
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: transparent;
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
-        background-image: repeating-linear-gradient(
-          135deg,
-          #015ba0,
-          #005ca1,
-          #005384,
-          #004769,
-          #004560,
-          #005a79,
-          #00789f,
-          #007397,
-          #006391,
-          #01598b,
-          #015c98
-        );
-        background-size: 300% 300%;
-        animation: walletslide 3s infinite linear both;
-        -moz-animation: walletslide 3s infinite linear both;
-        -webkit-animation: walletslide 3s infinite linear both;
-        -o-animation: walletslide 3s infinite linear both;
-      }
-      @keyframes walletslide {
-        0% {
-          background-position: 0% 0%;
+      flex: none;
+      justify-content: flex-start;
+      .WalletDes {
+        display: flex;
+        flex-direction: column;
+        height: 150px;
+        widows: 100%;
+        .WalletTip {
+          display: block;
+          position: relative;
+          top: 10px;
+          width: 100%;
+          color: @WalletTextColor;
+          height: 1.2rem;
+          line-height: 1.2rem;
+          text-align: center;
+          font-size: 0.9rem;
         }
-        100% {
-          background-position: 100% 100%;
+        .WalletTitle {
+          display: block;
+          position: relative;
+          // margin-top: 20px;
+          width: 100%;
+          height: 3rem;
+          line-height: 1.5rem;
+          text-align: center;
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: transparent;
+          -webkit-text-fill-color: transparent;
+          -webkit-background-clip: text;
+          background-image: repeating-linear-gradient(
+            135deg,
+            #015ba0,
+            #005ca1,
+            #005384,
+            #004769,
+            #004560,
+            #005a79,
+            #00789f,
+            #007397,
+            #006391,
+            #01598b,
+            #015c98
+          );
+          background-size: 300% 300%;
+          animation: walletslide 3s infinite linear both;
+          -moz-animation: walletslide 3s infinite linear both;
+          -webkit-animation: walletslide 3s infinite linear both;
+          -o-animation: walletslide 3s infinite linear both;
+        }
+        @keyframes walletslide {
+          0% {
+            background-position: 0% 0%;
+          }
+          100% {
+            background-position: 100% 100%;
+          }
         }
       }
+
       .WalletShowLogo {
-        margin: 20px 0 0 0;
+        // margin: 120px 0 0 0;
         width: 100%;
         height: 200px;
         .logo {
@@ -278,24 +331,26 @@ export default {
     }
     .right {
       position: relative;
-      top: 80px;
       width: 100%;
+      height: 350px;
       display: flex;
+      flex: none;
       justify-content: center;
       flex-direction: column;
       align-items: center;
       .ApplyForm {
         position: relative;
+        flex-grow: 0;
+        flex-shrink: 0;
         width: 90%;
-        height: 650px;
         background-color: white;
         box-shadow: 0 0 5px 5px @ShadowColor;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
         .FormLogo {
-          margin-top: 45px;
+          margin-top: 25px;
           display: block;
           position: relative;
           width: 62px;
@@ -324,16 +379,16 @@ export default {
         }
         .applyBtn {
           display: block;
-          margin-top: 10px;
-          // position: relative;
-          // bottom: 20px;
+          margin-top: 20px;
+          margin-bottom: 20px;
           width: 90%;
-          height: 62px;
+          height: 40px;
           outline: none;
           cursor: pointer;
           font-size: 1rem;
-          background: url("../assets/request_two.png") no-repeat center;
-          background-size: cover;
+          color: white;
+          border: 1px solid transparent;
+          border-radius: 6px;
         }
       }
     }

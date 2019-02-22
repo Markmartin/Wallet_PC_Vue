@@ -1,0 +1,39 @@
+.backgroundBlueGradient {
+    background: linear-gradient(135deg, #65ccff 40%, #35b2ff 75%, #0295ff);
+    // background: linear-gradient(135deg, #7dd1ff,#4ec4ff,#13a0e6);
+}
+
+.backgroundOrangeGradient {
+    background: linear-gradient(135deg, #ffe163 15%, #ff8d1c 80%, #ff6c00);
+}
+
+.textBuleGradient {
+    background: linear-gradient(135deg, #65ccff, #35b2ff, #0295ff,#015ba0,#005384,#004769);
+}
+
+
+.backgroundAnimation {
+    background-size: 200% 200%;
+    -webkit-animation: gradientAnimation 1.5s ease infinite alternate;;
+    -moz-animation: gradientAnimation 1.5s ease infinite alternate;;
+    animation: gradientAnimation 1.5s ease infinite alternate;;
+}
+
+.textAnimation {
+    background-size: 200% 200%;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-animation: gradientAnimation 3s ease infinite alternate;
+    -moz-animation: gradientAnimation 3s ease infinite alternate;
+    animation: gradientAnimation 3s ease infinite alternate; 
+}
+
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}

@@ -1,17 +1,19 @@
 <template>
   <div class="Wallet">
     <div class="left">
-      <label class="WalletTitle">How to get free ITC test tokens</label>
-      <label class="WalletText">SETP 1 Download beta wallet</label>
-      <label class="WalletTip">First things first,make sure you already installed ITC beta wallet</label>
+      <label class="WalletTitle textBuleGradient textAnimation">{{$t("Wallet.title")}}</label>
+      <label class="WalletText">{{$t("Wallet.stepone")}}</label>
+      <label class="WalletTip">{{$t("Wallet.steponedes")}}</label>
       <div class="download">
         <a href="https://testflight.apple.com/join/sueJ20be" target="_blank" class="ios"></a>
         <a href="https://fir.im/ITCWallet" target="_blank" class="android"></a>
       </div>
-      <label class="WalletText Step2">SETP 2 Click "Request" and pate you ITC wallet address</label>
+      <label class="WalletText Step2">{{$t("Wallet.steptwo")}}</label>
       <div class="Request">
-        <label class="RequestBtn" @click="goApply"></label>
-        <!-- <button class="RequestBtn" @click="goApply">Request</button> -->
+        <button
+          class="RequestBtn backgroundOrangeGradient backgroundAnimation"
+          @click="goApply"
+        >{{$t('Common.Request')}}</button>
       </div>
     </div>
     <div class="right">
@@ -33,6 +35,8 @@ export default {
 
 <style lang="less" scoped>
 @import "../less/color.less";
+@import "../less/gradient.less";
+
 .Wallet {
   position: relative;
   width: 100vw;
@@ -43,12 +47,12 @@ export default {
 //pc
 @media screen and (min-width: 768px) {
   .Wallet {
-    top: 100px;
+    top: 150px;
+    margin-bottom: 70px;
     justify-content: center;
     .left {
       width: 50%;
       max-width: 520px;
-      // background-color: @ThemeColor;
       .WalletTitle {
         display: block;
         position: relative;
@@ -60,36 +64,6 @@ export default {
         font-size: 30px;
         letter-spacing: 1.1px;
         font-weight: 800;
-        color: transparent;
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
-        background-image: repeating-linear-gradient(
-          135deg,
-          #015ba0,
-          #005ca1,
-          #005384,
-          #004769,
-          #004560,
-          #005a79,
-          #00789f,
-          #007397,
-          #006391,
-          #01598b,
-          #015c98
-        );
-        background-size: 300% 300%;
-        animation: walletslide 3s infinite linear both;
-        -moz-animation: walletslide 3s infinite linear both;
-        -webkit-animation: walletslide 3s infinite linear both;
-        -o-animation: walletslide 3s infinite linear both;
-      }
-      @keyframes walletslide {
-        0% {
-          background-position: 0% 0%;
-        }
-        100% {
-          background-position: 100% 100%;
-        }
       }
       .WalletText {
         position: relative;
@@ -122,38 +96,36 @@ export default {
         height: 73px;
         margin-top: 10px;
         .ios {
-          width: 47%;
-          height: 100%;
-          background: url("../assets/ios_download.png") no-repeat;
-          background-size: cover;
+          width: 49%;
+          height: inherit;
+          background: url("../assets/ios_en.png") no-repeat left center;
+          background-size: contain;
         }
         .android {
-          width: 47%;
-          height: 100%;
-          background: url("../assets/android_download.png") no-repeat;
-          background-size: cover;
+          width: 49%;
+          height: inherit;
+          background: url("../assets/android_en.png") no-repeat left center;
+          background-size: contain;
         }
       }
       .Request {
         position: relative;
-        margin-top: 10px;
+        margin-top: 5px;
         display: flex;
         justify-content: flex-start;
         width: 100%;
         .RequestBtn {
           position: relative;
-          margin-left: -10px;
-          width: 50%;
-          height: 62px;
-          background-color: @LightThemeColor;
+          width: 43%;
+          height: 45px;
           color: white;
+          background-color: @ThemeColor;
           border: 1px solid transparent;
           border-radius: 6px;
-          font-size: 1rem;
+          font-size: 1.2rem;
           outline: none;
           cursor: pointer;
-          background: url("../assets/request_one.png") no-repeat center;
-          background-size: contain;
+          border: none;
         }
       }
     }
@@ -177,7 +149,7 @@ export default {
 //mobile
 @media screen and (max-width: 768px) {
   .Wallet {
-    top: 51px;
+    top: 70px;
     justify-content: center;
     .left {
       width: 100%;
@@ -192,42 +164,12 @@ export default {
         font-size: 1.5rem;
         letter-spacing: 1.1px;
         font-weight: 800;
-        color: transparent;
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
-        background-image: repeating-linear-gradient(
-          135deg,
-          #015ba0,
-          #005ca1,
-          #005384,
-          #004769,
-          #004560,
-          #005a79,
-          #00789f,
-          #007397,
-          #006391,
-          #01598b,
-          #015c98
-        );
-        background-size: 300% 300%;
-        animation: walletslide 3s infinite linear both;
-        -moz-animation: walletslide 3s infinite linear both;
-        -webkit-animation: walletslide 3s infinite linear both;
-        -o-animation: walletslide 3s infinite linear both;
-      }
-      @keyframes walletslide {
-        0% {
-          background-position: 0% 0%;
-        }
-        100% {
-          background-position: 100% 100%;
-        }
       }
 
       .WalletText {
         position: relative;
         display: block;
-        width: 90%;
+        width: 93%;
         line-height: 1.5rem;
         font-size: 1rem;
         font-weight: 500;
@@ -239,7 +181,7 @@ export default {
       .WalletTip {
         position: relative;
         display: block;
-        width: 90%;
+        width: 93%;
         line-height: 1.2rem;
         font-size: 13px;
         text-align: left;
@@ -262,13 +204,13 @@ export default {
         .ios {
           width: 45%;
           height: 100%;
-          background: url("../assets/ios_download.png") no-repeat;
+          background: url("../assets/ios_en.png") no-repeat left center;
           background-size: contain;
         }
         .android {
           width: 45%;
           height: 100%;
-          background: url("../assets/android_download.png") no-repeat;
+          background: url("../assets/android_en.png") no-repeat left center;
           background-size: contain;
         }
       }
@@ -279,18 +221,16 @@ export default {
         width: 100%;
         height: 40px;
         .RequestBtn {
-          width: 50%;
-          height: 62px;
+          width: 45%;
+          height: 40px;
           position: relative;
-          margin: 20px 0 0 5px;
+          margin: 55px 0 0 10px;
           color: white;
           border: 1px solid transparent;
           border-radius: 6px;
           font-size: 1rem;
           outline: none;
           cursor: pointer;
-          background: url("../assets/request_one.png") no-repeat center;
-          background-size: contain;
         }
       }
     }

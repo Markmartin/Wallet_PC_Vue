@@ -2,7 +2,7 @@
   <div class="Footer">
     <div class="FooterContent">
       <div class="FooterLeftBox">
-        <p class="FooterSubscribe">Subscribe</p>
+        <p class="FooterSubscribe">{{$t("Footer.Subscribe")}}</p>
         <div class="FooterInputBox">
           <input
             class="FooterInput"
@@ -10,7 +10,7 @@
             type="text"
             placeholder="Email@example.com"
           >
-          <button class="FooterInputSubmit" @click="subscribeEvent">SUBSCRIBE</button>
+          <button class="FooterInputSubmit" @click="subscribeEvent">{{$t("Footer.Subscribe")}}</button>
         </div>
       </div>
       <div class="FooterRightBox">
@@ -18,11 +18,11 @@
           <button
             class="FooterWX"
             target="_blank"
-            onMouseOver="{this.onMouseOverWX}"
-            onMouseOut="{this.onMouseOutWX}"
+            @mouseover="onMouseOverWX"
+            @mouseout="onMouseOutWX"
           >
             <img class="ImgAIcon" src="../assets/ll0.png" alt>
-            <img v-if="isShowWxRrCode" class="WXQrCodeIcon" src="{wx_qr_code}" alt>
+            <img v-if="isShowWxRrCode" class="WXQrCodeIcon" src="../assets/weixin_qr_code.jpg" alt>
           </button>
           <a
             class="ImgA"
@@ -69,7 +69,7 @@
         <div class="FooterLinkIconBox MarginTop10">
           <a
             class="ImgA"
-            href="https://github.com/IoTChainCode"
+            href="https://github.com/c-block"
             target="_blank"
             rel="nofollow me noopener noreferrer"
           >
@@ -158,6 +158,12 @@ export default {
         this.$message.error(resp.msg);
       }
       this.mailAddress = "";
+    },
+    onMouseOverWX: function() {
+      this.isShowWxRrCode = true;
+    },
+    onMouseOutWX: function() {
+      this.isShowWxRrCode = false;
     }
   }
 };

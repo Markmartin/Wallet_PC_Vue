@@ -20,15 +20,6 @@ export default {
 
 
 <style lang="less">
-@media screen and (min-width: 768px) {
-  @import "./less/GuidePC.less";
-}
-
-//mobile
-@media screen and (max-width: 768px) {
-  @import "./less/GuideMobile.less";
-}
-
 #app {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", Arial, sans-serif;

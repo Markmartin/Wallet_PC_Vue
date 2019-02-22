@@ -11,11 +11,17 @@
       <div class="RightNaviBar">
         <div class="PCMenu">
           <a v-for="(item,index) in linkList" v-bind:key="index" :href="item.value">
-            <label class="MenuTag hvr-underline-from-center">{{item.tag}}</label>
+            <label class="MenuTag hvr-underline-from-center">{{$t(item.tag)}}</label>
           </a>
+          <label
+            class="LangLabel hvr-underline-reveal"
+            @mouseenter="mouseEnterEvent"
+            @mouseleave="mouseLeaveEvent"
+          >{{$t("Navigation.lang.currentlang.value")}}</label>
         </div>
         <div class="MobileMenu">
           <button class="ShowMenu" @click="ctrlMenu"></button>
+          <img class="ChangeLang" v-bind:src="getLangImg" @click="mobileChangeLang">
         </div>
       </div>
     </div>
@@ -26,49 +32,119 @@
         :href="item.value"
         class="MobileMenuTag"
       >
-        <label>{{item.tag}}</label>
+        <label>{{$t(item.tag)}}</label>
       </a>
+    </div>
+    <div
+      class="LangList"
+      :style="{left:langMenu.x+'px',top:langMenu.y+'px'}"
+      v-if="showPCLangMenu"
+      @mouseenter="listShowEvent"
+      @mouseleave="listHideEvent"
+    >
+      <label class="LangCell" @click="changeLang('langone')">{{$t("Navigation.lang.langone.value")}}</label>
+      <label class="LangCell" @click="changeLang('langtwo')">{{$t("Navigation.lang.langtwo.value")}}</label>
     </div>
   </div>
 </template>
 
 <script>
+import cnLangImg from "../assets/cn.png";
+import enLangImg from "../assets/en.png";
+import krLangImg from "../assets/kr.png";
+
 export default {
   name: "Navigation",
   data: function() {
     return {
       linkList: [
         {
-          tag: "Wallet",
+          tag: "Navigation.Wallet",
           value: "https://iotchain.io/wallet"
         },
         {
-          tag: "Explorer",
+          tag: "Navigation.Explorer",
           value: "https://iotchain.io/explorer"
         },
         {
-          tag: "News",
+          tag: "Navigation.News",
           value: "https://iotchain.io/news"
         },
-        // {
-        //   tag: "White Paper",
-        //   value: "https://iotchain.io/index.html?scroll=m22"
-        // },
-        // {
-        //   tag: "Team",
-        //   value: "https://iotchain.io/index.html?scroll=m55"
-        // },
         {
-          tag: "Bounty",
+          tag: "Navigation.Bounty",
           value: "https://bounty.iotchain.io/"
         }
       ],
-      showMobileMenu: false
+      showMobileMenu: false,
+      showPCLangMenu: false,
+      langMenu: {
+        x: 0,
+        y: 0
+      }
     };
+  },
+  computed: {
+    getLangImg: function() {
+      if (this.$i18n.locale === "en") {
+        return cnLangImg;
+      }
+      if (this.$i18n.locale === "cn") {
+        return krLangImg;
+      }
+      if (this.$i18n.locale === "kr") {
+        return enLangImg;
+      }
+      return null;
+    }
   },
   methods: {
     ctrlMenu: function() {
       this.showMobileMenu = !this.showMobileMenu;
+    },
+    mobileChangeLang: function() {
+      if (this.$i18n.locale === "en") {
+        this.$i18n.locale = "cn";
+        return;
+      }
+      if (this.$i18n.locale === "cn") {
+        this.$i18n.locale = "kr";
+        return;
+      }
+      if (this.$i18n.locale === "kr") {
+        this.$i18n.locale = "en";
+        return;
+      }
+    },
+    changeLang: function(key) {
+      this.$i18n.locale = this.$t("Navigation.lang." + key + ".key");
+    },
+    mouseEnterEvent: function(e) {
+      if (this.showPCLangMenu === false) {
+        this.showPCLangMenu = true;
+      }
+      if (this.langMenu.x != e.currentTarget.offsetLeft) {
+        this.langMenu.x =
+          e.currentTarget.offsetLeft + e.currentTarget.offsetWidth / 2 - 50;
+      }
+      if (this.langMenu.y != e.currentTarget.offsetTop) {
+        this.langMenu.y =
+          e.currentTarget.offsetTop + e.currentTarget.offsetHeight;
+      }
+    },
+    mouseLeaveEvent: function() {
+      if (this.showPCLangMenu === true) {
+        this.showPCLangMenu = false;
+      }
+    },
+    listShowEvent: function() {
+      if (this.showPCLangMenu === false) {
+        this.showPCLangMenu = true;
+      }
+    },
+    listHideEvent: function() {
+      if (this.showPCLangMenu === true) {
+        this.showPCLangMenu = false;
+      }
     }
   }
 };
@@ -76,7 +152,7 @@ export default {
 
 <style lang="less" scoped>
 @import "../less/color.less";
-@import "../less/hover.less";
+@import "../less/hover/hover.less";
 @import "../less/animate.less";
 
 .Navigation {
@@ -123,13 +199,23 @@ export default {
           display: none;
         }
         .MobileMenu {
+          display: flex;
+          width: 90px;
+          justify-content: space-around;
+          align-items: center;
           .ShowMenu {
-            width: 50px;
-            height: 20px;
+            width: 24px;
+            height: 23px;
             background: url("../assets/menu.png") no-repeat center;
-            background-size: 46% 100%;
+            background-size: contain;
             border: none;
             outline: none;
+          }
+          .ChangeLang {
+            margin-right: 5px;
+            display: inline-block;
+            width: 26px;
+            height: 28px;
           }
         }
       }
@@ -156,17 +242,21 @@ export default {
         border: 0.5px solid white;
       }
     }
+    .LangList {
+      display: none;
+    }
   }
 }
 
+//PC
 @media screen and (min-width: 768px) {
-  //PC
   .Navigation {
     min-width: 1080px;
     .NavigationHeader {
-      height: 90px;
+      height: 100px;
       .RightNaviBar {
-        justify-content: center;
+        justify-content: flex-end;
+        padding-right: 20px;
         .MenuTag {
           margin: 0 10px 0 10px;
           height: 2rem;
@@ -179,10 +269,44 @@ export default {
         .MobileMenu {
           display: none;
         }
+        .LangLabel {
+          margin: 0 10px 0 10px;
+          height: 2rem;
+          line-height: 2rem;
+          color: white;
+          background-color: transparent;
+          font-size: 1rem;
+          font-weight: 500;
+          cursor: pointer;
+        }
       }
     }
     .MobileMenuList {
       display: none;
+    }
+    .LangList {
+      position: fixed;
+      width: 100px;
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      // background-color: antiquewhite;
+      .LangCell {
+        flex: none;
+        padding-bottom: 5px;
+        width: 100%;
+        font-size: 1rem;
+        height: 1.5rem;
+        line-height: 1.5rem;
+        background-color: black;
+        opacity: 0.7;
+        color: white;
+        cursor: pointer;
+      }
+      .LangCell:hover {
+        color: @ThemeColor;
+      }
     }
   }
 }

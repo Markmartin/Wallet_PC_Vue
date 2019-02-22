@@ -1,7 +1,7 @@
 <template>
   <div class="WalletFinish">
     <div class="left">
-      <label class="WalletTitle WalletTitleFrame">Now,you're all ready</label>
+      <label class="WalletTitle WalletTitleFrame">{{$t("WalletFinish.title")}}</label>
       <div class="WalletShowLogo">
         <img class="logo" src="../assets/step_two.png">
       </div>
@@ -9,10 +9,8 @@
     <div class="right">
       <div class="ApplyForm">
         <img src="../assets/sicob.png" class="FormLogo">
-        <label class="WalletTitle SuccessFrame">Request Success</label>
-        <label
-          class="inputTitle"
-        >You will receive ITC within 10 min.Every request will grant you 100 ITC test tokens.</label>
+        <label class="WalletTitle SuccessFrame">{{$t("WalletFinish.finishTitle")}}</label>
+        <label class="inputTitle">{{$t("WalletFinish.des")}}</label>
         <img src="../assets/apply_success.png" class="success">
       </div>
     </div>
@@ -31,7 +29,6 @@ export default {
 .WalletFinish {
   position: relative;
   width: 100vw;
-  height: 500px;
   display: flex;
   .WalletTitle {
     display: block;
@@ -72,19 +69,24 @@ export default {
 //pc
 @media screen and (min-width: 768px) {
   .WalletFinish {
-    margin-top: 89px;
+    top: 100px;
+    height: 500px;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    flex: none;
     .left {
       width: 50%;
       max-width: 520px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-around;
+      justify-content: center;
 
       .WalletShowLogo {
+        margin-top: 20px;
         width: 100%;
+        flex: none;
         .logo {
           display: block;
           width: 100%;
@@ -100,27 +102,26 @@ export default {
     .right {
       width: 50%;
       max-width: 520px;
-      display: flex;
-      justify-content: center;
-      flex-direction: row;
-      align-items: center;
+      flex: none;
       .ApplyForm {
+        margin: 0 auto;
         width: 70%;
-        height: 400px;
+        height: 380px;
         background-color: white;
         box-shadow: 0 0 5px 5px @ShadowColor;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         .FormLogo {
           display: block;
           position: relative;
+          margin-top: 60px;
           width: 62px;
           height: 62px;
         }
         .SuccessFrame {
-          margin-top: 10px;
+          margin-top: 30px;
           width: 100%;
           height: 2rem;
           line-height: 2rem;
@@ -141,7 +142,7 @@ export default {
         }
         .success {
           display: block;
-          margin-top: 30px;
+          margin-top: 40px;
           width: 52px;
           height: 45px;
         }
@@ -149,13 +150,12 @@ export default {
     }
 
     .WalletTitleFrame {
-      top: 50px;
+      margin-bottom: 20px;
       width: 100%;
-      height: 4.5rem;
+      height: 2.5rem;
       line-height: 2.5rem;
       text-align: center;
       font-size: 1.8rem;
-      // letter-spacing: px;
       font-weight: 800;
     }
   }
@@ -164,23 +164,24 @@ export default {
 //mobile
 @media screen and (max-width: 768px) {
   .WalletFinish {
-    margin-top: 100px;
+    top: 60px;
+    margin-bottom: -70px;
     flex-direction: column;
-    // align-items: center;
-    justify-content: center;
-    // align-content: center;
+    justify-content: flex-start;
     .left {
+      margin-top: 30px;
+      flex: none;
       width: 100%;
+      height: 270px;
       display: flex;
       flex-direction: column;
-      // align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
       .WalletTitle {
+        flex: none;
         display: block;
         position: relative;
-        margin-top: 20px;
         width: 100%;
-        height: 3rem;
+        height: 1.5rem;
         line-height: 1.5rem;
         text-align: center;
         font-size: 1.5rem;
@@ -217,7 +218,7 @@ export default {
         }
       }
       .WalletShowLogo {
-        margin: 20px 0 0 0;
+        flex: none;
         width: 100%;
         height: 200px;
         .logo {
@@ -228,52 +229,55 @@ export default {
       }
     }
     .right {
+      flex: none;
       position: relative;
-      top: 80px;
+      margin-top: 30px;
       width: 100%;
       display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
       .ApplyForm {
         position: relative;
+        margin: 0 auto;
         width: 90%;
-        height: 650px;
+        height: 350px;
         background-color: white;
         box-shadow: 0 0 5px 5px @ShadowColor;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         .FormLogo {
+          margin-top: 60px;
+          flex: none;
           display: block;
           position: relative;
           width: 62px;
           height: 62px;
         }
         .SuccessFrame {
-          margin-top: 10px;
+          flex: none;
+          margin-top: 20px;
           width: 100%;
-          height: 1rem;
-          line-height: 1rem;
+          height: 1.5rem;
+          line-height: 1.5rem;
           text-align: center;
-          font-size: 1rem;
-          // letter-spacing: px;
+          font-size: 1.5rem;
           font-weight: 600;
         }
         .inputTitle {
+          flex: none;
           display: block;
           margin-top: 10px;
           width: 90%;
-          height: 1rem;
+          // height: 1rem;
           line-height: 1rem;
           font-size: 13px;
           text-align: center;
           color: @WalletTextColor;
         }
         .success {
+          flex: none;
           display: block;
-          margin-top: 30px;
+          margin-top: 20px;
           width: 52px;
           height: 45px;
         }
